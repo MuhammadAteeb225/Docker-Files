@@ -21,7 +21,7 @@ services:
       - NIFI_ZK_CONNECT_STRING=zookeeper:2181
       - NIFI_ELECTION_MAX_WAIT=1 min
       - NIFI_ELECTION_MAX_CANDIDATES=2
-      - NIFI_SENSITIVE_PROS_KEY=abcdefgh123456789
+      - NIFI_SENSITIVE_PROPS_KEY=abcdefgh123456789
     volumes:
       - nifi01_content_repository:/opt/nifi/nifi-current/content_repository
       - nifi01_database_repository:/opt/nifi/nifi-current/database_repository
@@ -47,7 +47,7 @@ services:
       - NIFI_ZK_CONNECT_STRING=zookeeper:2181
       - NIFI_ELECTION_MAX_WAIT=1 min
       - NIFI_ELECTION_MAX_CANDIDATES=2
-      - NIFI_SENSITIVE_PROS_KEY=abcdefgh123456789
+      - NIFI_SENSITIVE_PROPS_KEY=abcdefgh123456789
     volumes:
       - nifi02_content_repository:/opt/nifi/nifi-current/content_repository
       - nifi02_database_repository:/opt/nifi/nifi-current/database_repository
@@ -58,7 +58,7 @@ services:
       - nifi02_logs:/opt/nifi/nifi-current/logs
       - nifi02_data:/opt/nifi/nifi-current/data
       - type: bind
-        source: "C:\Users\Muham\Documents\Projects\nifi-drivers"
+        source: 'C:\Users\Muham\Documents\Projects\nifi-drivers'
         target: /opt/nifi/nifi-current/drivers
     networks:
       - nifi
@@ -73,7 +73,7 @@ services:
       - NIFI_ZK_CONNECT_STRING=zookeeper:2181
       - NIFI_ELECTION_MAX_WAIT=1 min
       - NIFI_ELECTION_MAX_CANDIDATES=2
-      - NIFI_SENSITIVE_PROS_KEY=abcdefgh123456789
+      - NIFI_SENSITIVE_PROPS_KEY=abcdefgh123456789
     volumes:
       - nifi03_content_repository:/opt/nifi/nifi-current/content_repository
       - nifi03_database_repository:/opt/nifi/nifi-current/database_repository
@@ -84,7 +84,7 @@ services:
       - nifi03_logs:/opt/nifi/nifi-current/logs
       - nifi03_data:/opt/nifi/nifi-current/data
       - type: bind
-        source: "C:\Users\Muham\Documents\Projects\nifi-drivers"
+        source: 'C:\Users\Muham\Documents\Projects\nifi-drivers'
         target: /opt/nifi/nifi-current/drivers
     networks:
       - nifi
