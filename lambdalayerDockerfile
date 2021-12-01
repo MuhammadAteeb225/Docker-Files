@@ -1,0 +1,18 @@
+FROM amazonlinux
+
+RUN yum update -y && \
+    yum install gcc tar gzip zip make openssl-devel libffi-devel bzip2-devel -y
+
+RUN cd /opt && \
+    curl -O https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz && \
+    tar -xzf Python-3.9.7.tgz
+
+RUN cd /opt/Python-3.9.7/ && \
+    ./configure --enable-optimizations && \
+    make altinstall
+
+
+RUN python3.9 -m pip install --upgrade pip && \
+    python3.9 -m pip install virtualenv
+
+RUN rm -f /opt/Python-3.9.7.tgz
