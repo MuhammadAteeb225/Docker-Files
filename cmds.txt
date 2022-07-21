@@ -1,0 +1,17 @@
+docker compose -f kafka-primary/docker-compose.yml up -d
+docker compose -f kafka-secondary/docker-compose.yml up -d
+docker run -it -u root --name test-node --net host bitnami/kafka bash
+kafka-topics.sh --bootstrap-server localhost:9092 --topic wizuda-01 --create --replication-factor 3 --partitions 3
+kafka-console-producer.sh --bootstrap-server localhost:9092 --topic wizuda-01 --property parse.key=true --property key.separator=":" --request-required-acks -1
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic wizuda-01 --group wizuda-test-consumer --from-beginning --property key.separator=":" --property print.timestamp=true --property print.key=true --property print.offset=true --property print.partition=true --property print.value=true
+docker exec -it -u root test-node bash
+docker cp connect-mirror-maker.properties test-node:/
+connect-mirror-maker.sh connect-mirror-maker.properties
+
+---------------
+
+docker compose -f kafka-stretched-cluster/docker-compose.yml up -d
+docker run -it -u root --name test-node --net host bitnami/kafka bash
+kafka-topics.sh --bootstrap-server localhost:9092 --topic wizuda-01 --create --replication-factor 4 --partitions 6
+kafka-console-producer.sh --bootstrap-server localhost:9092 --topic wizuda-01 --property parse.key=true --property key.separator=":" --request-required-acks -1
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic wizuda-01 --group wizuda-test-consumer --from-beginning --property key.separator=":" --property print.timestamp=true --property print.key=true --property print.offset=true --property print.partition=true --property print.value=true
